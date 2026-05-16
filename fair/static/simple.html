@@ -1,0 +1,69 @@
+<html>
+
+    <head>
+        <style>
+             {STYLE}  
+        </style>
+    </head>
+
+    <body>
+        <div id="main">
+
+
+            <!--Header-->
+            <div id="band">
+                <div id="python_image_container">
+                    {PYTHON_LOGO}
+                </div>
+                <div height=inherit style="flex-grow: 1;">
+                    <p id="title">FAIR Report</p>
+                </div>
+            </div>
+
+            <!--Metadata table-->
+            <br>
+            <div id="metadata_table">
+                    {METADATA}
+            </div>
+
+            <!--Overview Rows-->
+            <div class='separator'>
+                <p>Overview</p>
+            </div>
+
+            <div class='flex_row' id='overview_row'>
+                <div id='overview_df_container'>
+                    {OVERVIEW_DATAFRAME}
+                </div>
+            </div>
+            <div class='flex_row' id='overview_row'>
+                <div class='overview_img_container'>
+                        {HIST}
+                </div>
+            </div>
+            <div class='flex_row' id='overview_row'>
+                <div class='overview_img_container'>
+                    {EXCEEDENCE}
+					<h2>VaR Summary</h2>
+					{VAR_TABLE}
+                </div>
+            </div>
+
+
+            <!--Parameter breakdwon rows-->
+            <div class='separator'>
+                <p>Parameters</p>
+            </div>
+            <div>
+                {PARAMETER_HTML}
+            </div>
+
+            <!--Code rows-->
+            <div class='separator'>
+                <p>Code</p>
+            </div>
+
+        </div>
+    </body>
+
+</html>

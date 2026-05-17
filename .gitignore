@@ -1,0 +1,108 @@
+# Python related
+*.py[cod]
+*$py.class
+*.so
+__pycache__/
+*.egg-info/
+*.egg
+.Python
+celerybeat-schedule
+*.sage.py
+local_settings.py
+
+# Jupyter Notebook
+*.ipynb
+.ipynb_checkpoints
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# Packaging
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+.installed.cfg
+MANIFEST
+
+# Testing
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Documentation
+docs/_build/
+/site
+
+# IDEs and Editors
+.vscode/
+.idea/
+.spyderproject
+.spyproject
+.ropeproject
+.mypy_cache/
+
+# Databases
+db.sqlite3
+
+# Flask
+instance/
+.webassets-cache
+
+# Django
+*.log
+
+# Scrapy
+.scrapy
+
+# PyBuilder
+target/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Vim
+*.swp
+
+# Secrets
+.secrets
+.env.local
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Translations
+*.mo
+*.pot
+
+# Dependency Management
+poetry.lock
+Pipfile
+Pipfile.lock

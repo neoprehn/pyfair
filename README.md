@@ -1,4 +1,4 @@
-# fair
+# pyfair
 FAIR Simulator
 
 Erweitert durch Mirko Prehn

@@ -64,6 +64,9 @@ docs/_build/
 .ropeproject
 .mypy_cache/
 
+# Claude Code
+.claude/worktrees/
+
 # Databases
 db.sqlite3
 

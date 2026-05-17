@@ -33,12 +33,12 @@ setup(
         "Development Status :: 3 - Alpha",
         "License :: OSI Approved :: MIT License",
     ],
-    requires=[
-        "pandas",
-        "numpy",
-        "scipy",
-        "matplotlib",
-        "xlrd",
+    install_requires=[
+        "pandas>=0.24.1",
+        "numpy>=1.16.1",
+        "scipy>=1.2.1",
+        "matplotlib>=3.0.2",
+        "xlrd>=1.2.0",
     ],
     package_dir={"pyfair": "./fair"},
     package_data={"pyfair": ["./static/*"]},

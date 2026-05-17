@@ -40,6 +40,6 @@ setup(
         "matplotlib",
         "xlrd",
     ],
-    package_dir={"pyfair": "./pyfair"},
+    package_dir={"pyfair": "./fair"},
     package_data={"pyfair": ["./static/*"]},
 )

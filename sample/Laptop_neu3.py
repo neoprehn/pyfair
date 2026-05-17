@@ -201,7 +201,7 @@ try:
         currency_prefix='EUR ',
         risk_tolerance=risk_tolerance
     )
-    fsr.to_html("results/Laptop_neu.html", export_csv=True)
+    fsr.to_html("results/Laptop_neu.html", export_csv=False)
     print("\nReport created successfully: laptop_neu.html")
 except Exception as e:
     print("\nReport generation failed.")

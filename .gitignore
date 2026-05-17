@@ -41,6 +41,7 @@ MANIFEST
 
 # Testing
 htmlcov/
+results/
 .tox/
 .coverage
 .coverage.*

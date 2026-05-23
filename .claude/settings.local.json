@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); gh --version)",
+      "Bash(git -C \"c:/Users/mirko/OneDrive/Dokumente/Entwicklung/fair-web\" log --oneline -5 main)",
+      "Bash(git -C \"c:/Users/mirko/OneDrive/Dokumente/Entwicklung/fair-web\" show --stat d4c709e)"
+    ]
+  }
+}

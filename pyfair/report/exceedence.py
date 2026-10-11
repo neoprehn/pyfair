@@ -308,6 +308,11 @@ class FairExceedenceCurves(FairBaseCurve):
     def _sample_tolerance_distribution(self, distribution, params, count):
         """Sample direct loss values for a distribution-based risk tolerance."""
         distribution = str(distribution).lower()
+        # Fixed, local Generator (not the model's seed - this renders a
+        # reference/comparison curve, independent of any specific model) and
+        # never the global np.random state, matching the project convention
+        # (see FairBaseReport's scatter-plot jitter for the same pattern).
+        rng = np.random.default_rng(42)
 
         if distribution == 'pert':
             from ..utility.beta_pert import FairBetaPert
@@ -343,7 +348,7 @@ class FairExceedenceCurves(FairBaseCurve):
                 high=high,
                 gamma=gamma
             )
-            return pert.random_variates(count)
+            return pert.random_variates(count, rng=rng)
 
         if distribution == 'lognormal':
             required = ['mean', 'sigma']
@@ -362,7 +367,7 @@ class FairExceedenceCurves(FairBaseCurve):
                 raise FairException('Risk tolerance lognormal sigma must be greater than zero.')
 
             mu = np.log(mean) - 0.5 * (sigma ** 2)
-            return np.random.lognormal(mean=mu, sigma=sigma, size=count)
+            return rng.lognormal(mean=mu, sigma=sigma, size=count)
 
         raise FairException(
             f'Unsupported risk tolerance distribution "{distribution}". Supported: pert, lognormal.'

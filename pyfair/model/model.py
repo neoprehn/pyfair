@@ -68,7 +68,10 @@ class FairModel(object):
         self._n_simulations = n_simulations
         # Do not change the random_seed unless you have a good reason.
         self._random_seed = random_seed
-        np.random.seed(random_seed)
+        # A single, model-local Generator instance - never the global
+        # np.random.seed() state, so concurrent models (e.g. multiple
+        # requests in fair-web) never interfere with each other's draws.
+        self._rng = np.random.default_rng(random_seed)
         # Instantiate components
         self._model_table = pd.DataFrame(columns=[
             'Risk',
@@ -85,7 +88,7 @@ class FairModel(object):
             'Secondary Loss Event Frequency',
             'Secondary Loss Event Magnitude',
         ])
-        self._data_input  = FairDataInput() 
+        self._data_input  = FairDataInput(rng=self._rng)
         self._tree        = FairDependencyTree()
         self._calculation = FairCalculations()
         # If no ID supplied, create.

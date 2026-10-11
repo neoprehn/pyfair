@@ -195,7 +195,7 @@ class FairBetaPert(object):
         beta_denominator = self._mean - self._low
         return beta_numerator / beta_denominator
 
-    def random_variates(self, count):
+    def random_variates(self, count, rng=None):
         """Get n PERT-distributed random numbers
 
         This works by simpling calling the rvs() function of the beta curve
@@ -205,6 +205,11 @@ class FairBetaPert(object):
         ----------
         count : int
             The number of random variates that are required to be created
+        rng : numpy.random.Generator, optional
+            Generator to draw from. Defaults to None, which lets scipy fall
+            back to the legacy global numpy random state - callers that care
+            about reproducibility independent of global state should always
+            pass their own Generator.
 
         Returns
         -------
@@ -212,4 +217,4 @@ class FairBetaPert(object):
             An array of PERT-distributed random variates of size `count`
 
         """
-        return self._beta_curve.rvs(count)
+        return self._beta_curve.rvs(count, random_state=rng)

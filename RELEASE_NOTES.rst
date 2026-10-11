@@ -6,6 +6,14 @@ Version 1.0
 
 * Model Exchange based on the original pyfair
 * workes on the actual phython version
+* All Monte Carlo sampling now draws from a model-local ``numpy.random.Generator``
+  (``np.random.default_rng(random_seed)``) instead of the legacy global
+  ``np.random.seed()`` state. A given ``random_seed`` now produces different
+  (but still fully reproducible) numbers than before this change, since the
+  underlying bit generator differs (PCG64 vs. MT19937). Multiple models no
+  longer interfere with each other's draws regardless of construction/call
+  order - relevant for concurrent use (e.g. fair-web serving multiple
+  requests in one process).
 
 Version 0.1-alpha.12
 --------------------

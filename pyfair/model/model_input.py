@@ -36,7 +36,12 @@ class FairDataInput(object):
     legacy models should continue to work unchanged.
     """
 
-    def __init__(self):
+    def __init__(self, rng=None):
+        # Model-local Generator for all sampling in this input object.
+        # Falls back to an unseeded Generator for callers that construct
+        # FairDataInput directly (e.g. ad-hoc scripts/tests) without a
+        # FairModel wiring one in - still never touches global state.
+        self._rng = rng if rng is not None else np.random.default_rng()
         # These targets must be less than or equal to one.
         self._le_1_targets = [
             'Probability of Action',
@@ -615,12 +620,12 @@ class FairDataInput(object):
     def _gen_normal(self, count, **params):
         """Generate a normally distributed sample."""
         normal = scipy.stats.norm(loc=params['mean'], scale=params['stdev'])
-        return normal.rvs(count)
+        return normal.rvs(count, random_state=self._rng)
 
     def _gen_pert(self, count, **params):
         """Generate a Beta-PERT distributed sample."""
         pert = FairBetaPert(**params)
-        return pert.random_variates(count)
+        return pert.random_variates(count, rng=self._rng)
 
     def _gen_lognormal(self, count, **params):
         """Generate a lognormal sample using arithmetic mean and sigma.
@@ -638,7 +643,7 @@ class FairDataInput(object):
             raise FairException('"mean" for lognormal must be greater than zero.')
 
         mu = np.log(mean) - 0.5 * (sigma ** 2)
-        return np.random.lognormal(mean=mu, sigma=sigma, size=count)
+        return self._rng.lognormal(mean=mu, sigma=sigma, size=count)
 
     def _gen_poisson(self, count, **params):
         """Generate a Poisson sample with uncertain lambda.
@@ -659,8 +664,8 @@ class FairDataInput(object):
         # Keep lambda non-negative even if the range is large.
         low = max(0.0, low)
 
-        lam_sample = np.random.uniform(low, high, size=count)
-        return np.random.poisson(lam=lam_sample, size=count)
+        lam_sample = self._rng.uniform(low, high, size=count)
+        return self._rng.poisson(lam=lam_sample, size=count)
 
     def _gen_beta(self, count, **params):
         """Generate a beta-distributed sample.
@@ -682,4 +687,4 @@ class FairDataInput(object):
             alpha = mean * k
             beta = (1.0 - mean) * k
 
-        return np.random.beta(alpha, beta, size=count)
+        return self._rng.beta(alpha, beta, size=count)
